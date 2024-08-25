@@ -21,7 +21,6 @@ function Navbar() {
       staleTime: 1000 * 60 * 2,
     }
   );
-
   const navigate = useNavigate();
   function goToHome() {
     navigate('/');

@@ -6,15 +6,12 @@ import currencyStore from '../../state/store';
 import { useNavigate } from 'react-router-dom';
 import PageLoader from '../PageLoader/PageLoader';
 
-import { useCoinStore, useFetchCoins } from '../../state/coinStore';
 import { pageStore } from '../../state/pageStore';
 
 function CoinTable() {
   const { currency } = currencyStore();
   const navigate = useNavigate();
   const { page, setPage } = pageStore();
-
-  //   const [page, setPage] = useState(1);
   const { data, isLoading, isError, error } = useQuery(
     ['coins', page, currency],
     () => fetchCoinData(page, currency),
@@ -25,21 +22,6 @@ function CoinTable() {
       staleTime: 1000 * 60 * 2,
     }
   );
-
-  //   const { data, isLoading, isError, error } = useCoinStore();
-  //   const { data, isLoading, isError, error, filteredData } = useCoinStore(
-  //     (state) => ({
-  //       isLoading: state.isLoading,
-  //       isError: state.isError,
-  //       error: state.error,
-  //       filteredData: state.filteredData(),
-  //       data: state.data,
-  //     })
-  //   );
-  //   console.log(filteredData, 'djdjdjdjdj filtered data');
-
-  console.log(data, 'data');
-  useFetchCoins(page, currency);
 
   function handleCoinRedirect(id) {
     navigate(`/details/${id}`);
